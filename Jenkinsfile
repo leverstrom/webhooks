@@ -1,12 +1,12 @@
 pipeline {
   agent any
     parameters {
-        string(name: 'before', defaultValue: 'not-set', description: '')
+        booleanParam(name: 'created', defaultValue: false, description: '')
     }
   triggers {
     GenericTrigger(
      genericVariables: [
-      [key: 'before', value: '$.before']
+      [key: 'created', value: '$.created']
      ],
 
      causeString: 'Triggered on $ref',
@@ -28,8 +28,8 @@ pipeline {
     }
     stage('Some step') {
       steps {
-        echo "before:"
-        echo params.before
+        echo "created:"
+        echo params.created
       }
     }
   }
