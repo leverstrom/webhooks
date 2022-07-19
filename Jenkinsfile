@@ -13,12 +13,7 @@ pipeline{
      defaultValue("") //Optional, defaults to empty string
     }
    }
-   genericRequestVariables {
-    genericRequestVariable {
-     key("requestParameterName")
-     regexpFilter("")
-    }
-   }
+
    genericHeaderVariables {
     genericHeaderVariable {
      key("X_GITHUB_NAME")
