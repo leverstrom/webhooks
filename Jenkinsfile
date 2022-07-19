@@ -1,5 +1,8 @@
 pipeline {
   agent any
+    parameters {
+        string(name: 'before', defaultValue: 'not-set', description: '')
+    }
   triggers {
     GenericTrigger(
      genericVariables: [
@@ -28,7 +31,7 @@ pipeline {
     }
     stage('Some step') {
       steps {
-        sh "echo $before"
+        echo params.before
       }
     }
   }
