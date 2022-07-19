@@ -25,5 +25,11 @@ pipeline {
                 sh "printenv"
             }
         }
+        stage("Get Variables") {
+            steps {
+                sh "echo $reftype"
+                sh "echo $ref"
+            }
+        }
     }
 }
