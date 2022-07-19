@@ -21,8 +21,8 @@ pipeline {
   stages {
     stage('Some step') {
       steps {
-        sh env.ref_type
-        echo env.user
+        echo env.ref_type
+        echo env.users
       }
     }
   }
