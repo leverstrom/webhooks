@@ -7,10 +7,10 @@ pipeline {
   triggers {
     GenericTrigger(
      genericVariables: [
-        [expressionType: 'JSONPath', key: 'owner', value: '$.repository.owner.login'],
-        [expressionType: 'JSONPath', key: 'repo', value: '$.repository.name'],
-        [expressionType: 'JSONPath', key: 'user', value: '$.sender.login']
-     ],
+    [expressionType: 'JSONPath', key: 'owner', value: '$.repository.owner.login'],
+    [expressionType: 'JSONPath', key: 'repo', value: '$.repository.name'],
+    [expressionType: 'JSONPath', key: 'user', value: '$.sender.login']
+    ],
     genericHeaderVariables: [
     [key: 'X-GitHub-Event', regexpFilter: '']
     ],
@@ -23,12 +23,13 @@ pipeline {
      printPostContent: true,
 
      silentResponse: false,
+     regexpFilterExpression: 'refs/heads/feature',
     )
   }
   stages {
     stage('Some step') {
       steps {
-        echo env.repo
+        echo env.x_github_event
         echo params.owner
       }
     }
