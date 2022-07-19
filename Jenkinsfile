@@ -3,13 +3,17 @@ pipeline {
   triggers {
     GenericTrigger(
      genericVariables: [
-      [key: 'ref', value: '$.ref']
+      [key: 'ref', value: '$.ref'],
+      []
      ],
+    genericHeaderVariables {
+        genericHeaderVariable { key("X-GitHub-Event") regexpFilter("") } 
+    },
 
      causeString: 'Triggered on $ref',
 
-     token: 'abc123',
-     tokenCredentialId: '',
+     token: '',
+     tokenCredentialId: 'secret-token',
 
      printContributedVariables: true,
      printPostContent: true,
@@ -24,6 +28,7 @@ pipeline {
     stage('Some step') {
       steps {
         sh "echo $ref"
+        sh "echo $x_github_event"
       }
     }
   }
