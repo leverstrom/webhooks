@@ -3,7 +3,7 @@ pipeline{
         label "node"
     }
  triggers {
-  genericTrigger {
+  genericTrigger (
    genericVariables {
     genericVariable {
      key("VARIABLE_FROM_POST")
@@ -32,7 +32,7 @@ pipeline{
    silentResponse(false)
    regexpFilterText("\$VARIABLE_FROM_POST")
    regexpFilterExpression("aRegExp")
-  }
+  )
  }
  stages {
     stage("printenv") {
