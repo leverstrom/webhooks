@@ -21,10 +21,11 @@ pipeline {
     )
   }
   stages {
-    stage("environment") }
+    stage("environment") {
         steps {
             sh "printenv"
         }
+    }
     stage('Some step') {
       steps {
         sh "echo $before"
