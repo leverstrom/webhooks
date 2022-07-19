@@ -1,23 +1,23 @@
 pipeline {
     agent any
-    parameters {
-        booleanParam(name: 'created', defaultValue: false)
-        booleanParam(name: 'deleted', defaultValue: false)
-        string(name: 'ref', defaultValue: '')
-    }
+    // parameters {
+    //     booleanParam(name: 'created', defaultValue: false)
+    //     booleanParam(name: 'deleted', defaultValue: false)
+    //     string(name: 'ref', defaultValue: '')
+    // }
     triggers {
         GenericTrigger(
             
-            regexpFilterText: '',
-            regexpFilterExpression: '',
-            token: 'notsosecret',
-            printContributedVariables: true,
-
             genericVariables: [
                 [key: 'created', value: '$.created'],
                 [key: 'deleted', value: '$.deleted'],
-                [key: 'ref', value: '$.ref']
+                [key: 'ref_value', value: '$.ref']
             ],
+            regexpFilterText: '',
+            regexpFilterExpression: '',
+            token: 'notsosecret',
+            tokenCredentialId: '',
+            printContributedVariables: true,
 
         )
     }
@@ -36,7 +36,7 @@ pipeline {
         stage("Generic variables") {
             steps {
                 echo "Print other variables"
-                echo env.ref
+                echo "$ref_value"
             }
         }
     }
