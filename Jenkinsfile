@@ -8,7 +8,7 @@ pipeline {
      ],
     genericHeaderVariables {
         genericHeaderVariable { key("X-GitHub-Event") regexpFilter("") } 
-    }
+    },
 
      causeString: 'Triggered on $ref',
 
