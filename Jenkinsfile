@@ -1,44 +1,26 @@
-pipeline{
-    agent{
-        label "node"
-    }
- triggers {
-  genericTrigger (
-   genericVariables {
-    genericVariable {
-     key("VARIABLE_FROM_POST")
-     value("\$.something")
-     expressionType("JSONPath") //Optional, defaults to JSONPath
-     regexpFilter("") //Optional, defaults to empty string
-     defaultValue("") //Optional, defaults to empty string
-    }
-   }
+pipeline {
+    agent any
+    triggers {
+        GenericTrigger(
 
-   genericHeaderVariables {
-    genericHeaderVariable {
-     key("X_GITHUB_NAME")
-     regexpFilter("")
+            genericVariables: [
+                [key: 'ref', value: '$.ref'],
+                [key: 'reftype', value: '$.ref_type']
+            ],
+            token: 'notsosecret'
+        )
     }
-   }
-   token('notsosecret')
-   tokenCredentialId('')
-   printContributedVariables(true)
-   printPostContent(true)
-   silentResponse(false)
-   regexpFilterText("\$VARIABLE_FROM_POST")
-   regexpFilterExpression("aRegExp")
-  )
- }
- stages {
-    stage("printenv") {
-        steps {
-            sh "printenv"
+    stages {
+        stage("Get Environment") {
+            steps {
+                sh "printenv"
+            }
+        }
+        stage("Get Variables") {
+            steps {
+                sh "echo $reftype"
+                sh "echo $ref"
+            }
         }
     }
-    stage("showvalues") {
-        steps {
-            echo "$VARIABLE_FROM_POST"
-        }
-    }
- }
 }
