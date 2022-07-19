@@ -17,10 +17,7 @@ pipeline {
      printContributedVariables: true,
      printPostContent: true,
 
-     silentResponse: false,
-
-     regexpFilterText: '$ref',
-     regexpFilterExpression: 'refs/heads/' + BRANCH_NAME
+     silentResponse: false
     )
   }
   stages {
