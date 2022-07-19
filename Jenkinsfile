@@ -33,5 +33,10 @@ pipeline {
                 echo "created=${params.created};deleted=${params.deleted}"
             }
         }
+        stage("Generic variables") {
+            steps {
+                echo "Print other variables"
+            }
+        }
     }
 }
