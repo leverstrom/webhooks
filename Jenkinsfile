@@ -11,7 +11,7 @@ pipeline {
             token: 'notsosecret',
             printContributedVariables: true,
             regexpFilterText: '$ref',
-            regexpFilterExpression: '^refs\/heads\/feature',
+            regexpFilterExpression: 'refs/heads/feature*',
 
             genericVariables: [
                 [key: 'created', value: '$.created'],
