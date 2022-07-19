@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  parameters {
+    string(name: "ref_type", defaultValue: "", description: "REF TYPE")
+    string(name: "user", defaultValue: "", description: "SENDER LOGIN")
+  }
   triggers {
     GenericTrigger(
      genericVariables: [
@@ -21,8 +25,8 @@ pipeline {
   stages {
     stage('Some step') {
       steps {
-        echo env.ref_type
-        echo env.users
+        echo params.ref_type
+        echo params.users
       }
     }
   }
