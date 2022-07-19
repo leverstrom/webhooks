@@ -36,7 +36,7 @@ pipeline {
         stage("Generic variables") {
             steps {
                 echo "Print other variables"
-                echo env.ref
+                echo "$ref"
             }
         }
     }
