@@ -8,17 +8,17 @@ pipeline {
     triggers {
         GenericTrigger(
             
-            genericVariables: [
-                [key: 'created', value: '$.created'],
-                [key: 'deleted', value: '$.deleted'],
-                [key: 'ref_value', value: '$.ref']
-            ],
-            regexpFilterText: '',
-            regexpFilterExpression: '',
-            token: 'notsosecret',
-            tokenCredentialId: '',
-            printContributedVariables: true,
-
+        genericVariables: [
+        [key: 'pushedByName', value: '$.resource.pushedBy.displayName'],
+        [key: 'pushedByEmail', value: '$.resource.pushedBy.uniqueName'],
+        [key: 'commits', value: '$.resource.commits']
+        ],
+        causeString: 'source code push',
+        token: '80077ECCE8414C53AB6FA60C',
+        tokenCredentialId: '',
+        printContributedVariables: true,
+        printPostContent: true,
+        silentResponse: false
         )
     }
     stages {
@@ -29,14 +29,15 @@ pipeline {
         }
         stage("variables") {
             steps {
-                echo params.ref
-                echo "created=${params.created};deleted=${params.deleted}"
+                // echo params.ref
+                // echo "created=${params.created};deleted=${params.deleted}"
+                echo "$commits"
             }
         }
         stage("Generic variables") {
             steps {
                 echo "Print other variables"
-                echo "$ref_value"
+                echo "$pushedByName"
             }
         }
     }
