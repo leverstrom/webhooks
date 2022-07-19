@@ -31,6 +31,7 @@ pipeline {
     }
     stage('Some step') {
       steps {
+        echo "before:"
         echo params.before
       }
     }
