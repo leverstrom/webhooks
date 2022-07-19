@@ -20,4 +20,11 @@ pipeline {
             ]
         )
     }
+    stages {
+        stage("environment") {
+            steps {
+                sh "printenv"
+            }
+        }
+    }
 }
