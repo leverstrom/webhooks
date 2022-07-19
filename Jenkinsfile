@@ -9,7 +9,7 @@ pipeline {
         GenericTrigger(
             
             regexpFilterText: '',
-            regexpFilterExpression: ''
+            regexpFilterExpression: '',
             token: 'notsosecret',
             printContributedVariables: true,
 
