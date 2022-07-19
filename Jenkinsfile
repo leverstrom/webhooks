@@ -8,6 +8,8 @@ pipeline {
     triggers {
         GenericTrigger(
             
+            regexpFilterText: '',
+            regexpFilterExpression: ''
             token: 'notsosecret',
             printContributedVariables: true,
 
@@ -17,8 +19,6 @@ pipeline {
                 [key: 'ref', value: '$.ref']
             ],
 
-            regexpFilterText: '$ref',
-            regexpFilterExpression: '^refs/heads/feature'
         )
     }
     stages {
