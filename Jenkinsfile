@@ -2,7 +2,7 @@ pipeline {
   agent any
   parameters {
     string(name: "ref_type", defaultValue: "", description: "REF TYPE")
-    string(name: "user", defaultValue: "$user", description: "SENDER LOGIN")
+    string(name: "user", defaultValue: "", description: "SENDER LOGIN")
   }
   triggers {
     GenericTrigger(
