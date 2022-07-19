@@ -23,7 +23,7 @@ pipeline {
      printPostContent: true,
 
      silentResponse: false,
-     regexpFilterExpression: 'refs/heads/feature',
+     regexpFilterText: 'refs/heads/feature*'
     )
   }
   stages {
