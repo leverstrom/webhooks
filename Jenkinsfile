@@ -3,7 +3,7 @@ pipeline {
   triggers {
     GenericTrigger(
      genericVariables: [
-      [key: 'ref_type', value: '$.ref_type']
+      [key: 'ref_type', value: '$.ref_type'],
       [key: 'user', value: '$.sender.login']
      ],
 
