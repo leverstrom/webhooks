@@ -3,10 +3,11 @@ pipeline {
   triggers {
     GenericTrigger(
      genericVariables: [
-      [key: 'ref', value: '$.ref_type']
+      [key: 'ref_type', value: '$.ref_type']
+      [key: 'user', value: "$.sender.login"]
      ],
 
-     causeString: 'Triggered on $ref',
+     causeString: 'Triggered on $ref_type',
 
      token: 'notsosecret',
      tokenCredentialId: '',
@@ -15,15 +16,13 @@ pipeline {
      printPostContent: true,
 
      silentResponse: false,
-
-     regexpFilterText: '$ref_type',
-     regexpFilterExpression: 'refs/heads/' + BRANCH_NAME
     )
   }
   stages {
     stage('Some step') {
       steps {
-        sh "echo $ref"
+        sh "echo $ref_type"
+        echo "$user"
       }
     }
   }
