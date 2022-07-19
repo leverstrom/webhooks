@@ -28,8 +28,8 @@ pipeline {
   stages {
     stage('Some step') {
       steps {
-        echo env.owner
-        echo params.user
+        echo env.repo
+        echo params.owner
       }
     }
   }
