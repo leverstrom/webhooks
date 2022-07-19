@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    parameters {
+        string(name: "reftype", defaultValue: "", description: "GitHub REF type")
+        string(name: "ref", defaultValue: "", description: "Github REF value")
+    }
     triggers {
         GenericTrigger(
 
