@@ -28,8 +28,7 @@ pipeline {
     }
     stage('Some step') {
       steps {
-        echo "created:"
-        echo params.created
+        echo "created:$params.created"
       }
     }
   }
