@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    parameters {
+        booleanParam(name: 'created', defaultValue: false)
+        booleanParam(name: 'deleted', defaultValue: false)
+        string(name: 'ref', defaultValue: '')
+    }
+    stages {
+        stage('env') {
+            steps {
+                sh "printenv"
+            }
+        }
+        stage("variables") {
+            steps {
+                echo params.ref
+                echo "created=${params.created};deleted=${params.deleted}"
+            }
+        }
+    }
+}
