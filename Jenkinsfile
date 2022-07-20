@@ -1,35 +1,41 @@
 pipeline {
-  agent any
+    agent any
     parameters {
-        booleanParam(name: 'created', defaultValue: false, description: '')
+        string(name: "ref_value", defaultValue: "", description: "Payload ref")
+        string(name: "x_github_event", defaultValue: "", description: "Header X-Github-Event")
+        string(name: "ref_type", defaultValue: "", description "Payload ref_type")
     }
-  triggers {
-    GenericTrigger(
-     genericVariables: [
-      [key: 'created', value: '$.created']
-     ],
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+                [key: 'ref_value', value: '$.ref'],
+                [key: 'ref_type', value: '$.ref_type'],
+            ],
+            genericHeaderVariables: [
+                [key: 'X-Github-Event', regexpFilter: 'create']
 
-     causeString: 'Triggered on $ref',
+            ]
+            causeString: 'Triggered by Feature branch creation',
+            token: 'createBranchSecret',
+            tokenCredentialsId: '',
 
-     token: '80077ECCE8414C53AB6FA60C',
-     tokenCredentialId: '',
+            printContributedVariables: true,
+            printPostContent: true,
+            silentResponse: false
 
-     printContributedVariables: true,
-     printPostContent: true,
-
-     silentResponse: false
-    )
-  }
-  stages {
-    stage("environment") {
-        steps {
-            sh "printenv"
+        )
+    }
+    stages {
+        stage("environment") {
+            steps {
+                sh "printenv"
+            }
+        }
+        stage("some-step") {
+            steps {
+                echo "branch:$ref_value;type:$ref_type;event:$x_github_event"
+            }
         }
     }
-    stage('Some step') {
-      steps {
-        echo "created:$params.created"
-      }
-    }
-  }
+
 }
