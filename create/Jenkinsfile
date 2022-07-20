@@ -12,7 +12,7 @@ pipeline {
                 [key: 'ref_type', value: '$.ref_type'],
             ],
             genericHeaderVariables: [
-                [key: 'X-Github-Event', regexpFilter: '']
+                [key: 'X-Github-Event', regexpFilter: 'create']
 
             ],
             causeString: 'Triggered by Feature branch creation',
