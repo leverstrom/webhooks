@@ -16,13 +16,14 @@ pipeline {
 
             ],
             causeString: 'Triggered by Feature branch creation',
-            token: 'createBranchSecret',
+            token: 'deleteBranchSecret',
             tokenCredentialId: '',
 
             printContributedVariables: true,
             printPostContent: true,
-            silentResponse: false
-
+            silentResponse: false,
+            regexpFilterText: '$ref_value',
+            regexpFilterExpression: '^dev/'
         )
     }
     stages {
@@ -33,8 +34,17 @@ pipeline {
         }
         stage("some-step") {
             steps {
-                echo "branch:$params.ref_value;type:$params.ref_type;event:$params.x_github_event"
+                script {
+                    try {
+                        DATABASENAME="${params.ref_value.split("/")[1].toLowerCase()}"
+                    } catch (Exception e) {
+                        DATABASENAME=""
+                    }
+                    echo "branch:$params.ref_value;type:$params.ref_type;event:$params.x_github_event"
+                    echo "Deleting...$DATABASENAME"
+                }
             }
+
         }
     }
 
