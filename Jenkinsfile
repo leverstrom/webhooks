@@ -1,11 +1,12 @@
 pipeline {
     agent any
     environment {
-
+        
     }
     stages {
-        stage("") {
+        stage("information") {
             steps {
+                sh "printenv"
                 echo "$GIT_BRANCH"
             }
         }
