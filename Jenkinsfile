@@ -9,15 +9,5 @@ pipeline {
                 echo "$GIT_BRANCH"
             }
         }
-        stage("") {
-            steps {
-                
-            }
-        }
-        stage("") {
-            steps {
-
-            }
-        }
     }
-}
+}                                                                                                                                                                                                                                                                                  
